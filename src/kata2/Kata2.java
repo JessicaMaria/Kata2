@@ -1,34 +1,38 @@
 package kata2;
 
 import java.util.HashMap;
-import java.util.Set;
 
 public class Kata2 {
 
     public static void main(String[] args) {
-        int[] array = {1, 3, 4, 1, 5, 1, 10};
-        HashMap<Integer, Integer> mymap = new HashMap<>();
-
-        for (int i = 0; i < array.length; i++) {
-            if (mymap.containsKey(array[i])) {
-                mymap.put(array[i], mymap.get(array[i]) + 1);
-            } else{
-                mymap.put(array[i], 1);
+        int[] numbers = {1, 3, 4, 1, 5, 1, 10};
+        HashMap<Integer, Integer> frequencyMap = new HashMap<>();
+        for (int number : numbers) {
+            if (frequencyMap.containsKey(number)) {
+                frequencyMap.put(number, frequencyMap.get(number) + 1);
+            } else {
+                frequencyMap.put(number, 1);
             }
         }
 
-        Set<Integer> myset = mymap.keySet();
-        Integer[] myarray = myset.toArray(new Integer[myset.size()]);
-        int k, v;
-        k = myarray[0];
-        v = mymap.get(myarray[0]);
-        for (int i = 1; i < myarray.length; i++) {
-            if (mymap.get(myarray[i]) > k) {
-                k = myarray[i];
-                v = mymap.get(myarray[i]);
+        int number = -1;
+        int maxOcurrences = 0;
+
+        for (Integer key : frequencyMap.keySet()) {
+            if (frequencyMap.get(key) > maxOcurrences) {
+                number = key;
+                maxOcurrences = frequencyMap.get(key);
             }
         }
 
-        System.out.println(k + ": " + v + " veces");
+        System.out.println(number + "->" + maxOcurrences);
     }
+
+    private static int getFrequency(HashMap<Integer, Integer> frequencyMap, int number) {
+        if (frequencyMap.containsKey(number)) {
+            return frequencyMap.get(number);
+        }
+        return 0;
+    }
+
 }
