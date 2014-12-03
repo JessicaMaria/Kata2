@@ -1,33 +1,37 @@
 package kata2;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class Kata2 {
 
     public static void main(String[] args) {
         int[] numbers = {1, 3, 4, 1, 5, 1, 10};
-        HashMap<Integer, Integer> frequencyMap = new HashMap<>();
-        for (int number : numbers) {
-            frequencyMap.put(number, getFrequency(frequencyMap, number) + 1);
+        ArrayList<Integer> numberList = new ArrayList<>();
+        for (Integer integer : numbers) {
+            numberList.add(integer);
+
         }
 
-        int number = -1;
+        Collections.sort(numberList);
+
+        int previousNumber = -1;
+        int previousOcurrences = 0;
         int maxOcurrences = 0;
+        int maxNumber = -1;
 
-        for (Integer key : frequencyMap.keySet()) {
-            if (frequencyMap.get(key) > maxOcurrences) {
-                number = key;
-                maxOcurrences = frequencyMap.get(key);
+        for (Integer number : numberList) {
+            if (number != previousNumber) {
+                if (previousOcurrences > maxOcurrences) {
+                    maxNumber = previousNumber;
+                    maxOcurrences = previousOcurrences;
+                }
+                previousOcurrences = 0;
+                previousNumber = number;
             }
+            previousOcurrences += 1;
         }
-
-        System.out.println(number + "->" + maxOcurrences);
+        System.out.println(maxNumber + "->" + maxOcurrences);
     }
 
-    private static int getFrequency(HashMap<Integer, Integer> frequencyMap, int number) {
-        if (frequencyMap.containsKey(number)) {
-            return frequencyMap.get(number);
-        }
-        return 0;
-    }
 }
