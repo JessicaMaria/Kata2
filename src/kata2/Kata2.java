@@ -8,11 +8,7 @@ public class Kata2 {
         int[] numbers = {1, 3, 4, 1, 5, 1, 10};
         HashMap<Integer, Integer> frequencyMap = new HashMap<>();
         for (int number : numbers) {
-            if (frequencyMap.containsKey(number)) {
-                frequencyMap.put(number, frequencyMap.get(number) + 1);
-            } else {
-                frequencyMap.put(number, 1);
-            }
+            frequencyMap.put(number, getFrequency(frequencyMap, number) + 1);
         }
 
         int number = -1;
@@ -28,4 +24,10 @@ public class Kata2 {
         System.out.println(number + "->" + maxOcurrences);
     }
 
+    private static int getFrequency(HashMap<Integer, Integer> frequencyMap, int number) {
+        if (frequencyMap.containsKey(number)) {
+            return frequencyMap.get(number);
+        }
+        return 0;
+    }
 }
