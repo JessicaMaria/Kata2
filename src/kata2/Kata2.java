@@ -28,11 +28,4 @@ public class Kata2 {
         System.out.println(number + "->" + maxOcurrences);
     }
 
-    private static int getFrequency(HashMap<Integer, Integer> frequencyMap, int number) {
-        if (frequencyMap.containsKey(number)) {
-            return frequencyMap.get(number);
-        }
-        return 0;
-    }
-
 }
